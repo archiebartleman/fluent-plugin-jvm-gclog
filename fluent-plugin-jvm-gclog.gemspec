@@ -14,8 +14,9 @@ Gem::Specification.new do |gem|
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
-  gem.version       = "0.0.4"
+  gem.version       = "0.0.5"
   gem.add_development_dependency "rake"
-  gem.add_runtime_dependency "fluentd"
-  gem.add_runtime_dependency "jvm_gclog", ">= 0.0.2"
+  gem.add_development_dependency "rspec"
+  gem.add_runtime_dependency "fluentd", [">= 0.12.17", "< 2"]
+  gem.add_runtime_dependency "jvm_gclog", ">= 0.0.3"
 end

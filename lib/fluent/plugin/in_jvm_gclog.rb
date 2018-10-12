@@ -14,11 +14,14 @@
 # limitations under the License.
 #
 require "jvm_gclog"
+require "fluent/plugin/in_tail"
+require "fluent/event"
 
-module Fluent
+#module Fluent
+module Fluent::Plugin
 
-class JVMGCLogInput < TailInput
-  Plugin.register_input('jvm_gclog', self)
+class JVMGCLogInput < Fluent::Plugin::TailInput
+  Fluent::Plugin.register_input('jvm_gclog', self)
 
   def configure_parser(conf)
     @parser = JVMGCLog.new
@@ -26,7 +29,7 @@ class JVMGCLogInput < TailInput
   end
 
   def parse_lines(lines)
-    es = MultiEventStream.new
+    es = Fluent::MultiEventStream.new
     chunks = @parser.recognize_chunks(lines)
     records = @parser.parse_chunks(chunks)
     records.each { |record|
